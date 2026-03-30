@@ -27,6 +27,8 @@ A real-time visualization dashboard for [Claude Code](https://claude.ai/code) se
   </strong>
 </p>
 
+If you find this useful, [give it a star](https://github.com/anaypaul/claude-session-visualizer) — it helps others discover it.
+
 ---
 
 ## What is this?
