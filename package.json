@@ -1,6 +1,14 @@
 {
   "name": "claude-session-visualizer",
   "version": "0.1.0",
+  "description": "Live visualization dashboard for Claude Code sessions",
+  "license": "MIT",
+  "author": "Anay Paul",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anaypaul/claude-session-visualizer.git"
+  },
+  "keywords": ["claude", "claude-code", "visualization", "dashboard", "developer-tools"],
   "private": true,
   "type": "module",
   "scripts": {
