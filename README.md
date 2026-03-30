@@ -1,6 +1,21 @@
 # Claude Session Visualizer
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61dafb.svg)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933.svg)](https://nodejs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/anaypaul/claude-session-visualizer/pulls)
+
+> **DevTools for Claude Code** — See exactly what Claude did, how much it cost, where it failed, and what it was thinking.
+
 A real-time visualization dashboard for [Claude Code](https://claude.ai/code) sessions. Browse, search, and analyze your coding sessions with interactive execution trees, token cost tracking, thinking trace exploration, and error debugging — all in your browser.
+
+```
+ 3 commands to get started:
+ $ git clone https://github.com/anaypaul/claude-session-visualizer.git
+ $ cd claude-session-visualizer && npm install
+ $ npm run dev    # Open http://localhost:3458
+```
 
 <p align="center">
   <strong>
