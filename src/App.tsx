@@ -9,6 +9,10 @@ import { MetricsPanel } from './components/MetricsPanel';
 import { TokenBurnChart } from './components/TokenBurnChart';
 import { ThinkingExplorer } from './components/ThinkingExplorer';
 import { ErrorReplayView } from './components/ErrorReplayView';
+import {
+  exportSessionAsJson,
+  exportSessionAsMarkdown,
+} from './utils/sessionExport';
 
 type TabId = 'timeline' | 'agents' | 'tasks' | 'costs' | 'thinking' | 'errors';
 
@@ -145,6 +149,53 @@ const s = {
     gap: '10px',
   } as React.CSSProperties,
 
+  exportWrap: {
+    position: 'relative' as const,
+  } as React.CSSProperties,
+
+  exportBtn: {
+    padding: '8px 12px',
+    fontSize: '12px',
+    fontWeight: 600,
+    color: '#cfd2ff',
+    backgroundColor: '#1a1a2e',
+    border: '1px solid #333355',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'background-color 0.15s, border-color 0.15s',
+  } as React.CSSProperties,
+
+  exportMenu: {
+    position: 'absolute' as const,
+    top: 'calc(100% + 8px)',
+    right: 0,
+    minWidth: '170px',
+    backgroundColor: '#11111a',
+    border: '1px solid #222238',
+    borderRadius: '10px',
+    boxShadow: '0 12px 30px rgba(0, 0, 0, 0.35)',
+    padding: '6px',
+    zIndex: 20,
+  } as React.CSSProperties,
+
+  exportMenuBtn: {
+    width: '100%',
+    padding: '9px 10px',
+    textAlign: 'left' as const,
+    fontSize: '12px',
+    color: '#e0e0e8',
+    background: 'transparent',
+    border: 'none',
+    borderRadius: '6px',
+    cursor: 'pointer',
+  } as React.CSSProperties,
+
+  exportHint: {
+    fontSize: '11px',
+    color: '#6666a0',
+    marginRight: '2px',
+  } as React.CSSProperties,
+
   tabContent: {
     flex: 1,
     overflow: 'auto',
@@ -204,6 +255,8 @@ function formatTokenCount(n: number): string {
 function MetricsSummary() {
   const sessions = useStore((s) => s.sessions);
   const messages = useStore((s) => s.messages);
+  
+  
   const agents = useStore((s) => s.agents);
 
   const activeSessions = sessions.filter((s) => s.isActive).length;
@@ -216,6 +269,7 @@ function MetricsSummary() {
       totalTokens += msg.usage.input_tokens + msg.usage.output_tokens;
     }
   }
+
 
   return (
     <div style={s.metricsPanel}>
@@ -244,7 +298,13 @@ function MetricsSummary() {
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabId>('timeline');
   const [sidebarVisible, setSidebarVisible] = useState(true);
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
   const connected = useStore((s) => s.connected);
+  const messages = useStore((s) => s.messages);
+  const activeSessionId = useStore((s) => s.activeSessionId);
+  const sessions = useStore((s) => s.sessions);
+
+  const activeSession = sessions.find((session) => session.sessionId === activeSessionId) ?? null;
 
   // Establish SSE connection
   useSSE();
@@ -303,6 +363,62 @@ export default function App() {
             ))}
           </div>
           <div style={s.tabBarRight}>
+            <div style={s.exportWrap}>
+              <button
+                style={{
+                  ...s.exportBtn,
+                  opacity: messages.length === 0 ? 0.6 : 1,
+                  cursor: messages.length === 0 ? 'not-allowed' : 'pointer',
+                }}
+                onClick={() => {
+                  if (messages.length === 0) return;
+                  setExportMenuOpen((open) => !open);
+                }}
+                title={messages.length === 0 ? 'Load a session to export it' : 'Export current session'}
+                disabled={messages.length === 0}
+              >
+                Export
+              </button>
+              {exportMenuOpen && messages.length > 0 && (
+                <div style={s.exportMenu}>
+                  <button
+                    style={s.exportMenuBtn}
+                    onClick={() => {
+                      exportSessionAsJson(activeSession, messages);
+                      setExportMenuOpen(false);
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#1a1a2e';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    Download JSON
+                  </button>
+                  <button
+                    style={s.exportMenuBtn}
+                    onClick={() => {
+                      exportSessionAsMarkdown(activeSession, messages);
+                      setExportMenuOpen(false);
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = '#1a1a2e';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
+                  >
+                    Download Markdown
+                  </button>
+                </div>
+              )}
+            </div>
+            {activeSession && (
+              <span style={s.exportHint}>
+                {activeSession.sessionId.slice(0, 8)}
+              </span>
+            )}
             <span style={s.connectionLabel}>
               {connected ? 'Connected' : 'Disconnected'}
             </span>
