@@ -6,8 +6,12 @@ import type {
   TaskInfo,
   SSEEvent,
 } from './types';
+import { applyTheme, getStoredTheme, storeTheme, type ThemeMode } from './theme';
 
 export interface AppState {
+  // Theme
+  themeMode: ThemeMode;
+  toggleTheme: () => void;
   // Sessions
   sessions: SessionInfo[];
   activeSessionId: string | null;
@@ -33,7 +37,20 @@ export interface AppState {
   handleSSEEvent: (event: SSEEvent) => void;
 }
 
+// Apply the persisted (or default dark) theme immediately, before the first
+// render, so there's no flash of the wrong theme.
+const initialTheme = getStoredTheme();
+applyTheme(initialTheme);
+
 export const useStore = create<AppState>((set, get) => ({
+  themeMode: initialTheme,
+  toggleTheme: () => {
+    const next = get().themeMode === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    storeTheme(next);
+    set({ themeMode: next });
+  },
+
   sessions: [],
   activeSessionId: null,
   messages: [],

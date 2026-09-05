@@ -41,8 +41,8 @@ const s = {
     display: 'flex',
     height: '100vh',
     width: '100vw',
-    backgroundColor: '#0a0a0f',
-    color: '#e0e0e8',
+    backgroundColor: 'var(--cv-bg-canvas)',
+    color: 'var(--cv-text-primary)',
     overflow: 'hidden',
   } as React.CSSProperties,
 
@@ -52,8 +52,8 @@ const s = {
     height: '100%',
     display: 'flex',
     flexDirection: 'column' as const,
-    backgroundColor: '#12121a',
-    borderRight: '1px solid #222238',
+    backgroundColor: 'var(--cv-bg-panel)',
+    borderRight: '1px solid var(--cv-border-default)',
     overflow: 'hidden',
   } as React.CSSProperties,
 
@@ -66,27 +66,27 @@ const s = {
 
   header: {
     padding: '20px 16px 16px',
-    borderBottom: '1px solid #222238',
+    borderBottom: '1px solid var(--cv-border-default)',
     flexShrink: 0,
   } as React.CSSProperties,
 
   title: {
     fontSize: '15px',
     fontWeight: 700,
-    color: '#e0e0e8',
+    color: 'var(--cv-text-primary)',
     letterSpacing: '-0.2px',
   } as React.CSSProperties,
 
   subtitle: {
     fontSize: '11px',
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     marginTop: '4px',
   } as React.CSSProperties,
 
   sessionsLabel: {
     fontSize: '10px',
     fontWeight: 600,
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     textTransform: 'uppercase' as const,
     letterSpacing: '1px',
     padding: '12px 16px 6px',
@@ -94,7 +94,7 @@ const s = {
   } as React.CSSProperties,
 
   metricsPanel: {
-    borderTop: '1px solid #222238',
+    borderTop: '1px solid var(--cv-border-default)',
     padding: '12px 16px',
     flexShrink: 0,
   } as React.CSSProperties,
@@ -108,7 +108,7 @@ const s = {
 
   metricLabel: {
     fontSize: '11px',
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
   } as React.CSSProperties,
 
   metricValue: {
@@ -131,8 +131,8 @@ const s = {
     alignItems: 'center',
     gap: '0',
     padding: '0 16px',
-    backgroundColor: '#0e0e16',
-    borderBottom: '1px solid #222238',
+    backgroundColor: 'var(--cv-bg-header-bar)',
+    borderBottom: '1px solid var(--cv-border-default)',
     flexShrink: 0,
   } as React.CSSProperties,
 
@@ -157,9 +157,9 @@ const s = {
     padding: '8px 12px',
     fontSize: '12px',
     fontWeight: 600,
-    color: '#cfd2ff',
-    backgroundColor: '#1a1a2e',
-    border: '1px solid #333355',
+    color: 'var(--cv-text-export-btn)',
+    backgroundColor: 'var(--cv-bg-elevated)',
+    border: '1px solid var(--cv-border-active)',
     borderRadius: '8px',
     cursor: 'pointer',
     transition: 'background-color 0.15s, border-color 0.15s',
@@ -170,8 +170,8 @@ const s = {
     top: 'calc(100% + 8px)',
     right: 0,
     minWidth: '170px',
-    backgroundColor: '#11111a',
-    border: '1px solid #222238',
+    backgroundColor: 'var(--cv-bg-menu)',
+    border: '1px solid var(--cv-border-default)',
     borderRadius: '10px',
     boxShadow: '0 12px 30px rgba(0, 0, 0, 0.35)',
     padding: '6px',
@@ -183,7 +183,7 @@ const s = {
     padding: '9px 10px',
     textAlign: 'left' as const,
     fontSize: '12px',
-    color: '#e0e0e8',
+    color: 'var(--cv-text-primary)',
     background: 'transparent',
     border: 'none',
     borderRadius: '6px',
@@ -192,21 +192,21 @@ const s = {
 
   exportHint: {
     fontSize: '11px',
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     marginRight: '2px',
   } as React.CSSProperties,
 
   tabContent: {
     flex: 1,
     overflow: 'auto',
-    backgroundColor: '#0a0a0f',
+    backgroundColor: 'var(--cv-bg-canvas)',
   } as React.CSSProperties,
 
   connectionDot: (connected: boolean): React.CSSProperties => ({
     width: '8px',
     height: '8px',
     borderRadius: '50%',
-    backgroundColor: connected ? '#22c55e' : '#ef4444',
+    backgroundColor: connected ? 'var(--cv-status-success)' : 'var(--cv-status-danger)',
     boxShadow: connected
       ? '0 0 6px rgba(34, 197, 94, 0.5)'
       : '0 0 6px rgba(239, 68, 68, 0.4)',
@@ -214,18 +214,34 @@ const s = {
 
   connectionLabel: {
     fontSize: '11px',
-    color: '#8888a0',
+    color: 'var(--cv-text-muted)',
   } as React.CSSProperties,
 
   collapseBtn: {
     background: 'none',
     border: 'none',
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     cursor: 'pointer',
     fontSize: '16px',
     padding: '4px 8px',
     borderRadius: '4px',
     lineHeight: 1,
+  } as React.CSSProperties,
+
+  themeToggleBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '30px',
+    height: '30px',
+    background: 'var(--cv-bg-elevated)',
+    border: '1px solid var(--cv-border-active)',
+    borderRadius: '8px',
+    color: 'var(--cv-text-secondary)',
+    cursor: 'pointer',
+    fontSize: '14px',
+    lineHeight: 1,
+    transition: 'background-color 0.15s, border-color 0.15s',
   } as React.CSSProperties,
 };
 
@@ -234,14 +250,14 @@ function tabStyle(active: boolean): React.CSSProperties {
     padding: '12px 18px',
     fontSize: '13px',
     fontWeight: active ? 600 : 400,
-    color: active ? '#e0e0e8' : '#8888a0',
+    color: active ? 'var(--cv-text-primary)' : 'var(--cv-text-muted)',
     cursor: 'pointer',
-    borderBottom: active ? '2px solid #6366f1' : '2px solid transparent',
+    borderBottom: active ? '2px solid var(--cv-accent-indigo)' : '2px solid transparent',
     background: 'none',
     border: 'none',
     borderBottomStyle: 'solid',
     borderBottomWidth: '2px',
-    borderBottomColor: active ? '#6366f1' : 'transparent',
+    borderBottomColor: active ? 'var(--cv-accent-indigo)' : 'transparent',
     transition: 'color 0.15s, border-color 0.15s',
   };
 }
@@ -275,19 +291,19 @@ function MetricsSummary() {
     <div style={s.metricsPanel}>
       <div style={s.metricRow}>
         <span style={s.metricLabel}>Active sessions</span>
-        <span style={{ ...s.metricValue, color: activeSessions > 0 ? '#22c55e' : '#8888a0' }}>
+        <span style={{ ...s.metricValue, color: activeSessions > 0 ? 'var(--cv-status-success)' : 'var(--cv-text-muted)' }}>
           {activeSessions}
         </span>
       </div>
       <div style={s.metricRow}>
         <span style={s.metricLabel}>Running agents</span>
-        <span style={{ ...s.metricValue, color: activeAgents > 0 ? '#818cf8' : '#8888a0' }}>
+        <span style={{ ...s.metricValue, color: activeAgents > 0 ? 'var(--cv-accent-indigo-light)' : 'var(--cv-text-muted)' }}>
           {activeAgents}
         </span>
       </div>
       <div style={s.metricRow}>
         <span style={s.metricLabel}>Tokens (session)</span>
-        <span style={{ ...s.metricValue, color: '#e0e0e8' }}>
+        <span style={{ ...s.metricValue, color: 'var(--cv-text-primary)' }}>
           {formatTokenCount(totalTokens)}
         </span>
       </div>
@@ -303,6 +319,8 @@ export default function App() {
   const messages = useStore((s) => s.messages);
   const activeSessionId = useStore((s) => s.activeSessionId);
   const sessions = useStore((s) => s.sessions);
+  const themeMode = useStore((s) => s.themeMode);
+  const toggleTheme = useStore((s) => s.toggleTheme);
 
   const activeSession = sessions.find((session) => session.sessionId === activeSessionId) ?? null;
 
@@ -388,7 +406,7 @@ export default function App() {
                       setExportMenuOpen(false);
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#1a1a2e';
+                      e.currentTarget.style.backgroundColor = 'var(--cv-bg-elevated)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent';
@@ -403,7 +421,7 @@ export default function App() {
                       setExportMenuOpen(false);
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = '#1a1a2e';
+                      e.currentTarget.style.backgroundColor = 'var(--cv-bg-elevated)';
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.backgroundColor = 'transparent';
@@ -423,6 +441,14 @@ export default function App() {
               {connected ? 'Connected' : 'Disconnected'}
             </span>
             <div style={s.connectionDot(connected)} />
+            <button
+              style={s.themeToggleBtn}
+              onClick={toggleTheme}
+              title={themeMode === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              aria-label="Toggle color theme"
+            >
+              {themeMode === 'dark' ? '☀️' : '\u{1F319}'}
+            </button>
           </div>
         </div>
         <div style={s.tabContent}>

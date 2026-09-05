@@ -76,9 +76,9 @@ const s = {
     padding: '6px 8px',
     fontSize: '11px',
     fontWeight: active ? 600 : 400,
-    color: active ? '#e0e0e8' : '#6666a0',
-    backgroundColor: active ? '#1e1e3a' : 'transparent',
-    border: active ? '1px solid #333355' : '1px solid transparent',
+    color: active ? 'var(--cv-text-primary)' : 'var(--cv-text-faint)',
+    backgroundColor: active ? 'var(--cv-bg-active)' : 'transparent',
+    border: active ? '1px solid var(--cv-border-active)' : '1px solid transparent',
     borderRadius: '6px',
     cursor: 'pointer',
     transition: 'all 0.15s',
@@ -88,16 +88,16 @@ const s = {
     margin: '4px 8px 8px',
     padding: '7px 10px',
     fontSize: '12px',
-    backgroundColor: '#0e0e16',
-    border: '1px solid #222238',
+    backgroundColor: 'var(--cv-bg-header-bar)',
+    border: '1px solid var(--cv-border-default)',
     borderRadius: '6px',
-    color: '#e0e0e8',
+    color: 'var(--cv-text-primary)',
     outline: 'none',
     fontFamily: "'SF Mono', 'Fira Code', 'Cascadia Code', monospace",
   } as React.CSSProperties,
   countBadge: {
     fontSize: '10px',
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     padding: '4px 12px 2px',
     flexShrink: 0,
   } as React.CSSProperties,
@@ -112,7 +112,7 @@ const s = {
   groupLabel: {
     fontSize: '10px',
     fontWeight: 600,
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     textTransform: 'uppercase' as const,
     letterSpacing: '0.8px',
     padding: '10px 4px 4px',
@@ -124,8 +124,8 @@ const s = {
     padding: '10px 12px',
     borderRadius: '8px',
     cursor: 'pointer',
-    backgroundColor: isSelected ? '#1e1e3a' : 'transparent',
-    border: isSelected ? '1px solid #6366f1' : '1px solid transparent',
+    backgroundColor: isSelected ? 'var(--cv-bg-active)' : 'transparent',
+    border: isSelected ? '1px solid var(--cv-accent-indigo)' : '1px solid transparent',
     transition: 'background-color 0.15s, border-color 0.15s',
   }),
   topRow: {
@@ -137,7 +137,7 @@ const s = {
   sessionId: {
     fontFamily: "'SF Mono', 'Fira Code', 'Cascadia Code', monospace",
     fontSize: '12px',
-    color: '#c0c0d0',
+    color: 'var(--cv-text-secondary)',
     fontWeight: 500 as const,
   },
   badge: (active: boolean): React.CSSProperties => ({
@@ -148,7 +148,7 @@ const s = {
     textTransform: 'uppercase' as const,
     letterSpacing: '0.5px',
     backgroundColor: active ? 'rgba(34, 197, 94, 0.15)' : 'rgba(136, 136, 160, 0.1)',
-    color: active ? '#22c55e' : '#8888a0',
+    color: active ? 'var(--cv-status-success)' : 'var(--cv-text-muted)',
     flexShrink: 0,
   }),
   projectBadge: {
@@ -157,7 +157,7 @@ const s = {
     padding: '2px 6px',
     borderRadius: '4px',
     backgroundColor: 'rgba(99, 102, 241, 0.12)',
-    color: '#818cf8',
+    color: 'var(--cv-accent-indigo-light)',
     flexShrink: 0,
   } as React.CSSProperties,
   middleRow: {
@@ -174,7 +174,7 @@ const s = {
   },
   cwd: {
     fontSize: '11px',
-    color: '#8888a0',
+    color: 'var(--cv-text-muted)',
     overflow: 'hidden' as const,
     textOverflow: 'ellipsis' as const,
     whiteSpace: 'nowrap' as const,
@@ -182,17 +182,17 @@ const s = {
   },
   meta: {
     fontSize: '10px',
-    color: '#555570',
+    color: 'var(--cv-text-faintest)',
   },
   time: {
     fontSize: '11px',
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     flexShrink: 0,
   },
   emptyState: {
     padding: '24px 16px',
     textAlign: 'center' as const,
-    color: '#6666a0',
+    color: 'var(--cv-text-faint)',
     fontSize: '13px',
   },
 };
@@ -216,7 +216,7 @@ function SessionItem({
     <div
       style={{
         ...s.item(isSelected),
-        ...(hovered && !isSelected ? { backgroundColor: '#15152a' } : {}),
+        ...(hovered && !isSelected ? { backgroundColor: 'var(--cv-bg-hover)' } : {}),
       }}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}

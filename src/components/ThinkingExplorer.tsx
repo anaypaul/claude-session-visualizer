@@ -47,8 +47,8 @@ function highlightText(
       <mark
         key={i}
         style={{
-          backgroundColor: 'rgba(250, 204, 21, 0.4)',
-          color: '#fef08a',
+          backgroundColor: 'var(--cv-highlight-bg)',
+          color: 'var(--cv-highlight-text)',
           borderRadius: 2,
           padding: '0 2px',
         }}
@@ -101,15 +101,15 @@ function SparklineTooltip({
   return (
     <div
       style={{
-        background: '#1a1a2e',
-        border: '1px solid #333',
+        background: 'var(--cv-bg-elevated)',
+        border: '1px solid var(--cv-border-muted)',
         borderRadius: 6,
         padding: '6px 10px',
         fontSize: 11,
-        color: '#e0e0e8',
+        color: 'var(--cv-text-primary)',
       }}
     >
-      <div style={{ color: '#8888a0', marginBottom: 2 }}>Turn {point.index}</div>
+      <div style={{ color: 'var(--cv-text-muted)', marginBottom: 2 }}>Turn {point.index}</div>
       <div style={{ fontWeight: 600 }}>
         {point.chars.toLocaleString()} chars (~{Math.round(point.chars / 4).toLocaleString()} tokens)
       </div>
@@ -254,7 +254,7 @@ export function ThinkingExplorer(): React.ReactElement {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '60px 20px',
-          color: '#555',
+          color: 'var(--cv-text-subtle)',
           fontSize: 14,
           fontStyle: 'italic',
         }}
@@ -269,7 +269,7 @@ export function ThinkingExplorer(): React.ReactElement {
   // -----------------------------------------------------------------------
 
   return (
-    <div style={{ width: '100%', color: '#e0e0e8', fontFamily: 'inherit' }}>
+    <div style={{ width: '100%', color: 'var(--cv-text-primary)', fontFamily: 'inherit' }}>
       {/* Summary Stats Bar */}
       <div
         style={{
@@ -315,8 +315,8 @@ export function ThinkingExplorer(): React.ReactElement {
           >
             <defs>
               <linearGradient id="thinking-grad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#8b5cf6" stopOpacity={0.3} />
-                <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.02} />
+                <stop offset="0%" stopColor="var(--cv-accent-violet)" stopOpacity={0.3} />
+                <stop offset="100%" stopColor="var(--cv-accent-violet)" stopOpacity={0.02} />
               </linearGradient>
             </defs>
             <XAxis dataKey="index" hide />
@@ -325,14 +325,14 @@ export function ThinkingExplorer(): React.ReactElement {
             <Area
               type="monotone"
               dataKey="chars"
-              stroke="#8b5cf6"
+              stroke="var(--cv-accent-violet)"
               strokeWidth={1.5}
               fill="url(#thinking-grad)"
               dot={false}
               activeDot={{
                 r: 3,
-                fill: '#8b5cf6',
-                stroke: '#1a1a2e',
+                fill: 'var(--cv-accent-violet)',
+                stroke: 'var(--cv-bg-elevated)',
                 strokeWidth: 2,
               }}
             />
@@ -356,12 +356,12 @@ export function ThinkingExplorer(): React.ReactElement {
             onChange={(e) => handleSearch(e.target.value)}
             style={{
               flex: 1,
-              background: '#111119',
-              border: '1px solid #333',
+              background: 'var(--cv-bg-search-input)',
+              border: '1px solid var(--cv-border-muted)',
               borderRadius: 6,
               padding: '8px 12px',
               fontSize: 13,
-              color: '#e0e0e8',
+              color: 'var(--cv-text-primary)',
               outline: 'none',
               fontFamily: 'inherit',
             }}
@@ -370,7 +370,7 @@ export function ThinkingExplorer(): React.ReactElement {
             <span
               style={{
                 fontSize: 11,
-                color: '#8888a0',
+                color: 'var(--cv-text-muted)',
                 whiteSpace: 'nowrap',
                 flexShrink: 0,
               }}
@@ -404,7 +404,7 @@ export function ThinkingExplorer(): React.ReactElement {
             style={{
               padding: '32px 16px',
               textAlign: 'center',
-              color: '#555',
+              color: 'var(--cv-text-subtle)',
               fontSize: 13,
               fontStyle: 'italic',
             }}
@@ -435,7 +435,7 @@ function StatBadge({
       <span
         style={{
           fontSize: 10,
-          color: '#8888a0',
+          color: 'var(--cv-text-muted)',
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
         }}
@@ -446,7 +446,7 @@ function StatBadge({
         style={{
           fontSize: 14,
           fontWeight: 600,
-          color: highlight ? '#8b5cf6' : '#e0e0e8',
+          color: highlight ? 'var(--cv-accent-violet)' : 'var(--cv-text-primary)',
           fontVariantNumeric: 'tabular-nums',
         }}
       >
@@ -489,8 +489,8 @@ function ThinkingCard({
   return (
     <div
       style={{
-        background: '#0d0d15',
-        border: '1px dashed #333',
+        background: 'var(--cv-bg-inset)',
+        border: '1px dashed var(--cv-border-muted)',
         borderRadius: 8,
         padding: 16,
       }}
@@ -509,12 +509,12 @@ function ThinkingCard({
           style={{
             fontSize: 13,
             fontWeight: 700,
-            color: '#e0e0e8',
+            color: 'var(--cv-text-primary)',
           }}
         >
           Turn {turnIndex}
         </span>
-        <span style={{ fontSize: 11, color: '#666' }}>
+        <span style={{ fontSize: 11, color: 'var(--cv-text-subtle-alt)' }}>
           {formatTimestamp(message.timestamp)}
         </span>
         {message.model && (
@@ -522,7 +522,7 @@ function ThinkingCard({
             style={{
               fontSize: 10,
               background: 'rgba(139, 92, 246, 0.15)',
-              color: '#a78bfa',
+              color: 'var(--cv-accent-violet-light)',
               padding: '2px 8px',
               borderRadius: 4,
               fontWeight: 500,
@@ -538,15 +538,15 @@ function ThinkingCard({
         <div
           style={{
             fontSize: 12,
-            color: '#8888a0',
+            color: 'var(--cv-text-muted)',
             marginBottom: 10,
             padding: '6px 10px',
-            background: 'rgba(255, 255, 255, 0.03)',
+            background: 'var(--cv-overlay-faint)',
             borderRadius: 4,
-            borderLeft: '2px solid #333',
+            borderLeft: '2px solid var(--cv-border-muted)',
           }}
         >
-          <span style={{ color: '#555', marginRight: 6 }}>Triggered by:</span>
+          <span style={{ color: 'var(--cv-text-subtle)', marginRight: 6 }}>Triggered by:</span>
           {triggerText}
         </div>
       )}
@@ -557,7 +557,7 @@ function ThinkingCard({
           fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
           fontSize: 12,
           lineHeight: 1.6,
-          color: '#9ca3af',
+          color: 'var(--cv-text-thinking-content)',
           fontStyle: 'italic',
           whiteSpace: 'pre-wrap',
           wordBreak: 'break-word',
@@ -581,7 +581,7 @@ function ThinkingCard({
           flexWrap: 'wrap',
           gap: 8,
           fontSize: 11,
-          color: '#666',
+          color: 'var(--cv-text-subtle-alt)',
         }}
       >
         <span>
@@ -593,7 +593,7 @@ function ThinkingCard({
         {whatFollowed && (
           <span
             style={{
-              color: '#8888a0',
+              color: 'var(--cv-text-muted)',
               maxWidth: 400,
               overflow: 'hidden',
               textOverflow: 'ellipsis',

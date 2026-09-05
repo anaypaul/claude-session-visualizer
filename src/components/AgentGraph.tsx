@@ -20,20 +20,20 @@ import type { AgentInfo, ToolCallInfo, ParsedMessage } from '../types';
 // ─── Tool color mapping ───────────────────────────────────────────
 
 const TOOL_COLORS: Record<string, string> = {
-  Bash: '#f59e0b',
-  Read: '#3b82f6',
-  Glob: '#3b82f6',
-  Grep: '#3b82f6',
-  Write: '#22c55e',
-  Edit: '#22c55e',
-  Agent: '#a855f7',
-  WebSearch: '#06b6d4',
-  WebFetch: '#06b6d4',
-  Skill: '#ec4899',
+  Bash: 'var(--cv-status-warning)',
+  Read: 'var(--cv-status-blue)',
+  Glob: 'var(--cv-status-blue)',
+  Grep: 'var(--cv-status-blue)',
+  Write: 'var(--cv-status-success)',
+  Edit: 'var(--cv-status-success)',
+  Agent: 'var(--cv-status-purple)',
+  WebSearch: 'var(--cv-status-cyan)',
+  WebFetch: 'var(--cv-status-cyan)',
+  Skill: 'var(--cv-status-pink)',
 };
 
 function getToolColor(toolName: string): string {
-  return TOOL_COLORS[toolName] ?? '#6b7280';
+  return TOOL_COLORS[toolName] ?? 'var(--cv-text-dim)';
 }
 
 // ─── Utility: truncate tool input to a summary ───────────────────
@@ -101,8 +101,8 @@ function AgentNode({ data }: NodeProps) {
   return (
     <div
       style={{
-        background: '#1a1a2e',
-        border: `1.5px solid ${isRunning ? '#4f46e5' : '#333'}`,
+        background: 'var(--cv-bg-elevated)',
+        border: `1.5px solid ${isRunning ? 'var(--cv-accent-indigo-strong)' : 'var(--cv-border-muted)'}`,
         borderRadius: 10,
         padding: '14px 18px',
         minWidth: 220,
@@ -122,7 +122,7 @@ function AgentNode({ data }: NodeProps) {
         <Handle
           type="target"
           position={Position.Top}
-          style={{ background: '#555', border: 'none', width: 8, height: 8 }}
+          style={{ background: 'var(--cv-text-subtle)', border: 'none', width: 8, height: 8 }}
         />
       )}
 
@@ -134,12 +134,12 @@ function AgentNode({ data }: NodeProps) {
               width: 8,
               height: 8,
               borderRadius: '50%',
-              background: isRunning ? '#22c55e' : '#6b7280',
-              boxShadow: isRunning ? '0 0 6px #22c55e' : 'none',
+              background: isRunning ? 'var(--cv-status-success)' : 'var(--cv-text-dim)',
+              boxShadow: isRunning ? '0 0 6px var(--cv-status-success)' : 'none',
               animation: isRunning ? 'agentPulse 2s ease-in-out infinite' : 'none',
             }}
           />
-          <span style={{ fontSize: 11, fontWeight: 600, color: isRunning ? '#a5b4fc' : '#8888a0', textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>
+          <span style={{ fontSize: 11, fontWeight: 600, color: isRunning ? 'var(--cv-text-running-label)' : 'var(--cv-text-muted)', textTransform: 'uppercase' as const, letterSpacing: '0.05em' }}>
             {isRunning ? 'Running' : 'Completed'}
           </span>
         </div>
@@ -150,10 +150,10 @@ function AgentNode({ data }: NodeProps) {
               fontSize: 10,
               padding: '2px 8px',
               borderRadius: 10,
-              background: isRoot ? '#312e81' : '#1e293b',
-              color: isRoot ? '#a5b4fc' : '#94a3b8',
+              background: isRoot ? 'var(--cv-bg-root-badge)' : 'var(--cv-bg-owner-badge)',
+              color: isRoot ? 'var(--cv-text-running-label)' : 'var(--cv-text-owner-badge)',
               fontWeight: 500,
-              border: `1px solid ${isRoot ? '#4338ca' : '#334155'}`,
+              border: `1px solid ${isRoot ? 'var(--cv-border-root-badge)' : 'var(--cv-border-owner-badge)'}`,
             }}
           >
             {isRoot ? 'Main Session' : agent?.agentType ?? 'agent'}
@@ -165,7 +165,7 @@ function AgentNode({ data }: NodeProps) {
       <div
         style={{
           fontSize: 13,
-          color: '#e0e0e8',
+          color: 'var(--cv-text-primary)',
           fontWeight: 500,
           lineHeight: 1.4,
           marginBottom: 6,
@@ -180,7 +180,7 @@ function AgentNode({ data }: NodeProps) {
       </div>
 
       {/* Stats row */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 11, color: '#8888a0' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12, fontSize: 11, color: 'var(--cv-text-muted)' }}>
         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
           <span style={{ fontSize: 12 }}>&#9993;</span>
           <span>{messageCount} messages</span>
@@ -196,7 +196,7 @@ function AgentNode({ data }: NodeProps) {
       <Handle
         type="source"
         position={Position.Bottom}
-        style={{ background: '#555', border: 'none', width: 8, height: 8 }}
+        style={{ background: 'var(--cv-text-subtle)', border: 'none', width: 8, height: 8 }}
       />
     </div>
   );
@@ -220,8 +220,8 @@ function ToolNode({ data }: NodeProps) {
   return (
     <div
       style={{
-        background: '#141422',
-        border: `1.5px solid ${isError ? '#ef4444' : color}`,
+        background: 'var(--cv-bg-graph-tool-node)',
+        border: `1.5px solid ${isError ? 'var(--cv-status-danger)' : color}`,
         borderRadius: 6,
         padding: '6px 10px',
         width: 120,
@@ -243,9 +243,9 @@ function ToolNode({ data }: NodeProps) {
           {toolName}
         </span>
         {isError ? (
-          <span style={{ fontSize: 11, color: '#ef4444' }} title="Error">{'\u2716'}</span>
+          <span style={{ fontSize: 11, color: 'var(--cv-status-danger)' }} title="Error">{'\u2716'}</span>
         ) : (
-          <span style={{ fontSize: 11, color: '#22c55e' }} title="Success">{'\u2714'}</span>
+          <span style={{ fontSize: 11, color: 'var(--cv-status-success)' }} title="Success">{'\u2714'}</span>
         )}
       </div>
 
@@ -254,7 +254,7 @@ function ToolNode({ data }: NodeProps) {
         <div
           style={{
             fontSize: 10,
-            color: '#8888a0',
+            color: 'var(--cv-text-muted)',
             lineHeight: 1.3,
             overflow: 'hidden',
             textOverflow: 'ellipsis',
@@ -418,7 +418,7 @@ function layoutFullTree(
             type: 'default',
             animated: toolIsRunning,
             style: {
-              stroke: tc.isError ? '#ef4444' : toolColor,
+              stroke: tc.isError ? 'var(--cv-status-danger)' : toolColor,
               strokeWidth: 1.5,
               strokeDasharray: toolIsRunning ? '4 3' : 'none',
               opacity: 0.7,
@@ -434,7 +434,7 @@ function layoutFullTree(
             type: 'default',
             animated: toolIsRunning,
             style: {
-              stroke: tc.isError ? '#ef4444' : '#444',
+              stroke: tc.isError ? 'var(--cv-status-danger)' : 'var(--cv-text-very-faint)',
               strokeWidth: 1,
               strokeDasharray: toolIsRunning ? '4 3' : 'none',
               opacity: 0.6,
@@ -463,7 +463,7 @@ function layoutFullTree(
         type: 'default',
         animated: !!childIsRunning,
         style: {
-          stroke: childIsRunning ? '#4f46e5' : '#444',
+          stroke: childIsRunning ? 'var(--cv-accent-indigo-strong)' : 'var(--cv-text-very-faint)',
           strokeWidth: 2,
           strokeDasharray: childIsRunning ? '5 5' : 'none',
         },
@@ -505,6 +505,7 @@ export function AgentGraph() {
 
   const agents = useStore((s) => s.agents);
   const messages = useStore((s) => s.messages);
+  const themeMode = useStore((s) => s.themeMode);
 
   const [collapsedSet, setCollapsedSet] = useState<Set<string>>(() => new Set(['__main__']));
   const [rfInstance, setRfInstance] = useState<ReactFlowInstance | null>(null);
@@ -585,8 +586,8 @@ export function AgentGraph() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#0a0a0f',
-          color: '#8888a0',
+          background: 'var(--cv-bg-canvas)',
+          color: 'var(--cv-text-muted)',
           fontSize: 14,
           fontStyle: 'italic',
         }}
@@ -597,7 +598,7 @@ export function AgentGraph() {
   }
 
   return (
-    <div style={{ width: '100%', height: '100%', background: '#0a0a0f', position: 'relative' }}>
+    <div style={{ width: '100%', height: '100%', background: 'var(--cv-bg-canvas)', position: 'relative' }}>
       {/* Toolbar */}
       <div
         style={{
@@ -620,9 +621,9 @@ export function AgentGraph() {
         nodeTypes={nodeTypes}
         onInit={onInit}
         fitView
-        colorMode="dark"
+        colorMode={themeMode}
         proOptions={{ hideAttribution: true }}
-        style={{ background: '#0a0a0f' }}
+        style={{ background: 'var(--cv-bg-canvas)' }}
         nodesDraggable={true}
         nodesConnectable={false}
         elementsSelectable={true}
@@ -633,36 +634,36 @@ export function AgentGraph() {
           variant={BackgroundVariant.Dots}
           gap={20}
           size={1}
-          color="#1a1a2e"
+          color="var(--cv-bg-elevated)"
         />
         <MiniMap
           nodeStrokeColor={(n: Node) => {
             if (n.type === 'toolNode') {
               const td = n.data as unknown as ToolNodeData;
-              return td.isError ? '#ef4444' : td.color;
+              return td.isError ? 'var(--cv-status-danger)' : td.color;
             }
-            return '#333';
+            return 'var(--cv-border-muted)';
           }}
           nodeColor={(n: Node) => {
             if (n.type === 'toolNode') {
               const td = n.data as unknown as ToolNodeData;
-              return td.color + '33'; // with alpha
+              return `color-mix(in srgb, ${td.color} 20%, transparent)`; // with alpha
             }
-            return '#1a1a2e';
+            return 'var(--cv-bg-elevated)';
           }}
           nodeBorderRadius={4}
           maskColor="rgba(0, 0, 0, 0.7)"
           style={{
-            background: '#0d0d15',
-            border: '1px solid #222',
+            background: 'var(--cv-bg-inset)',
+            border: '1px solid var(--cv-border-chart-axis)',
             borderRadius: 4,
           }}
         />
         <Controls
           showInteractive={false}
           style={{
-            background: '#12121a',
-            border: '1px solid #333',
+            background: 'var(--cv-bg-panel)',
+            border: '1px solid var(--cv-border-muted)',
             borderRadius: 4,
           }}
         />
@@ -678,10 +679,10 @@ function ToolbarButton({ label, onClick }: { label: string; onClick: () => void 
     <button
       onClick={onClick}
       style={{
-        background: '#1a1a2e',
-        border: '1px solid #333',
+        background: 'var(--cv-bg-elevated)',
+        border: '1px solid var(--cv-border-muted)',
         borderRadius: 6,
-        color: '#c0c0d0',
+        color: 'var(--cv-text-secondary)',
         fontSize: 11,
         fontWeight: 500,
         padding: '5px 10px',
@@ -689,12 +690,12 @@ function ToolbarButton({ label, onClick }: { label: string; onClick: () => void 
         transition: 'background 0.15s, border-color 0.15s',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = '#252540';
-        e.currentTarget.style.borderColor = '#555';
+        e.currentTarget.style.background = 'var(--cv-bg-toolbar-hover)';
+        e.currentTarget.style.borderColor = 'var(--cv-text-subtle)';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background = '#1a1a2e';
-        e.currentTarget.style.borderColor = '#333';
+        e.currentTarget.style.background = 'var(--cv-bg-elevated)';
+        e.currentTarget.style.borderColor = 'var(--cv-border-muted)';
       }}
     >
       {label}

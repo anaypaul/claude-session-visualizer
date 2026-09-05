@@ -6,8 +6,8 @@ interface ThinkingBlockProps {
 
 const styles = {
   container: (expanded: boolean): React.CSSProperties => ({
-    background: '#0d0d15',
-    border: '1px dashed #333',
+    background: 'var(--cv-bg-inset)',
+    border: '1px dashed var(--cv-border-muted)',
     borderRadius: 8,
     margin: '8px 0',
     overflow: 'hidden',
@@ -20,7 +20,7 @@ const styles = {
     padding: '10px 14px',
     cursor: 'pointer',
     userSelect: 'none' as const,
-    color: '#8888a0',
+    color: 'var(--cv-text-muted)',
     fontSize: 13,
     fontStyle: 'italic' as const,
   },
@@ -29,7 +29,7 @@ const styles = {
     transition: 'transform 0.2s ease',
     transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)',
     fontSize: 10,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
   }),
   contentWrapper: (expanded: boolean): React.CSSProperties => ({
     maxHeight: expanded ? 2000 : 0,
@@ -42,7 +42,7 @@ const styles = {
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
     fontSize: 12,
     lineHeight: 1.6,
-    color: '#7a7a90',
+    color: 'var(--cv-text-thinking)',
     fontStyle: 'italic' as const,
     whiteSpace: 'pre-wrap' as const,
     wordBreak: 'break-word' as const,

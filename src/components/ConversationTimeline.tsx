@@ -73,21 +73,21 @@ const styles = {
     flexDirection: 'column' as const,
     height: '100%',
     position: 'relative' as const,
-    background: '#0a0a0f',
+    background: 'var(--cv-bg-canvas)',
   },
   header: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '12px 20px',
-    borderBottom: '1px solid #1a1a2e',
+    borderBottom: '1px solid var(--cv-bg-elevated)',
     flexShrink: 0,
-    background: '#0c0c14',
+    background: 'var(--cv-bg-timeline-header)',
   },
   headerTitle: {
     fontSize: 14,
     fontWeight: 600,
-    color: '#e0e0e8',
+    color: 'var(--cv-text-primary)',
     letterSpacing: 0.3,
   },
   connectionIndicator: (connected: boolean): React.CSSProperties => ({
@@ -95,13 +95,13 @@ const styles = {
     alignItems: 'center',
     gap: 6,
     fontSize: 11,
-    color: connected ? '#4ade80' : '#ef4444',
+    color: connected ? 'var(--cv-status-success-bright)' : 'var(--cv-status-danger)',
   }),
   connectionDot: (connected: boolean): React.CSSProperties => ({
     width: 6,
     height: 6,
     borderRadius: '50%',
-    background: connected ? '#22c55e' : '#ef4444',
+    background: connected ? 'var(--cv-status-success)' : 'var(--cv-status-danger)',
     boxShadow: connected
       ? '0 0 6px rgba(34, 197, 94, 0.5)'
       : '0 0 6px rgba(239, 68, 68, 0.5)',
@@ -119,7 +119,7 @@ const styles = {
     justifyContent: 'center',
     height: '100%',
     gap: 12,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
     fontSize: 14,
   },
   emptyIcon: {
@@ -127,11 +127,11 @@ const styles = {
     opacity: 0.4,
   },
   emptyText: {
-    color: '#666',
+    color: 'var(--cv-text-subtle-alt)',
     fontSize: 14,
   },
   emptySubtext: {
-    color: '#444',
+    color: 'var(--cv-text-very-faint)',
     fontSize: 12,
   },
   turnDivider: {
@@ -143,11 +143,11 @@ const styles = {
   dividerLine: {
     flex: 1,
     height: 1,
-    background: '#1a1a2e',
+    background: 'var(--cv-bg-elevated)',
   },
   dividerTimestamp: {
     fontSize: 10,
-    color: '#444',
+    color: 'var(--cv-text-very-faint)',
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
     whiteSpace: 'nowrap' as const,
   },
@@ -158,9 +158,9 @@ const styles = {
     transform: 'translateX(-50%)',
     padding: '6px 16px',
     borderRadius: 20,
-    border: '1px solid #333',
-    background: '#1a1a2e',
-    color: '#8888a0',
+    border: '1px solid var(--cv-border-muted)',
+    background: 'var(--cv-bg-elevated)',
+    color: 'var(--cv-text-muted)',
     fontSize: 12,
     cursor: 'pointer',
     display: 'flex',
@@ -305,13 +305,13 @@ export function ConversationTimeline() {
           onClick={scrollToBottom}
           onMouseEnter={(e) => {
             (e.currentTarget as HTMLButtonElement).style.background =
-              '#22223a';
-            (e.currentTarget as HTMLButtonElement).style.color = '#c0c0d0';
+              'var(--cv-border-chart-axis)23a';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--cv-text-secondary)';
           }}
           onMouseLeave={(e) => {
             (e.currentTarget as HTMLButtonElement).style.background =
-              '#1a1a2e';
-            (e.currentTarget as HTMLButtonElement).style.color = '#8888a0';
+              'var(--cv-bg-elevated)';
+            (e.currentTarget as HTMLButtonElement).style.color = 'var(--cv-text-muted)';
           }}
         >
           <span>&#8595;</span>
