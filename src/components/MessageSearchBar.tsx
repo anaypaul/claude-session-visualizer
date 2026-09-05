@@ -20,8 +20,8 @@ const barStyle: React.CSSProperties = {
   gap: 8,
   padding: '6px 16px',
   minHeight: 48,
-  background: '#12121a',
-  borderBottom: '1px solid #1a1a2e',
+  background: 'var(--cv-bg-panel)',
+  borderBottom: '1px solid var(--cv-bg-elevated)',
   flexShrink: 0,
   flexWrap: 'wrap',
 };
@@ -31,10 +31,10 @@ const searchInputStyle: React.CSSProperties = {
   minWidth: 140,
   height: 30,
   padding: '0 10px 0 30px',
-  border: '1px solid #2a2a3e',
+  border: '1px solid var(--cv-border-input)',
   borderRadius: 6,
-  background: '#0a0a0f',
-  color: '#e0e0e8',
+  background: 'var(--cv-bg-canvas)',
+  color: 'var(--cv-text-primary)',
   fontSize: 12,
   outline: 'none',
   fontFamily: 'inherit',
@@ -52,7 +52,7 @@ const searchIconStyle: React.CSSProperties = {
   top: '50%',
   transform: 'translateY(-50%)',
   fontSize: 13,
-  color: '#555',
+  color: 'var(--cv-text-subtle)',
   pointerEvents: 'none',
   lineHeight: 1,
 };
@@ -68,19 +68,19 @@ const pillGroupStyle: React.CSSProperties = {
 function pillStyle(active: boolean, color?: string): React.CSSProperties {
   const bg = active
     ? color === 'red'
-      ? '#5c1a1a'
-      : '#1e2a4a'
-    : '#16161e';
+      ? 'var(--cv-bg-pill-red-active)'
+      : 'var(--cv-bg-pill-blue-active)'
+    : 'var(--cv-bg-pill-inactive)';
   const border = active
     ? color === 'red'
-      ? '#a03030'
-      : '#3060b0'
-    : '#2a2a3e';
+      ? 'var(--cv-border-pill-red-active)'
+      : 'var(--cv-border-pill-blue-active)'
+    : 'var(--cv-border-input)';
   const textColor = active
     ? color === 'red'
-      ? '#ff6b6b'
-      : '#8cb4ff'
-    : '#666';
+      ? 'var(--cv-pill-red-text)'
+      : 'var(--cv-pill-blue-text)'
+    : 'var(--cv-text-subtle-alt)';
 
   return {
     padding: '3px 10px',
@@ -101,10 +101,10 @@ function pillStyle(active: boolean, color?: string): React.CSSProperties {
 const selectStyle: React.CSSProperties = {
   height: 28,
   padding: '0 8px',
-  border: '1px solid #2a2a3e',
+  border: '1px solid var(--cv-border-input)',
   borderRadius: 6,
-  background: '#0a0a0f',
-  color: '#e0e0e8',
+  background: 'var(--cv-bg-canvas)',
+  color: 'var(--cv-text-primary)',
   fontSize: 11,
   outline: 'none',
   cursor: 'pointer',
@@ -114,9 +114,9 @@ const selectStyle: React.CSSProperties = {
 const countBarStyle: React.CSSProperties = {
   padding: '3px 16px',
   fontSize: 10,
-  color: '#555',
-  background: '#0e0e16',
-  borderBottom: '1px solid #1a1a2e',
+  color: 'var(--cv-text-subtle)',
+  background: 'var(--cv-bg-header-bar)',
+  borderBottom: '1px solid var(--cv-bg-elevated)',
   flexShrink: 0,
   fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
 };

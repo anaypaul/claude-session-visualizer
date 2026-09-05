@@ -6,18 +6,18 @@ interface ToolCallCardProps {
 }
 
 const TOOL_COLORS: Record<string, string> = {
-  Bash: '#f59e0b',
-  Read: '#3b82f6',
-  Glob: '#3b82f6',
-  Grep: '#3b82f6',
-  Write: '#22c55e',
-  Edit: '#22c55e',
-  Agent: '#a855f7',
-  WebSearch: '#06b6d4',
-  WebFetch: '#06b6d4',
+  Bash: 'var(--cv-status-warning)',
+  Read: 'var(--cv-status-blue)',
+  Glob: 'var(--cv-status-blue)',
+  Grep: 'var(--cv-status-blue)',
+  Write: 'var(--cv-status-success)',
+  Edit: 'var(--cv-status-success)',
+  Agent: 'var(--cv-status-purple)',
+  WebSearch: 'var(--cv-status-cyan)',
+  WebFetch: 'var(--cv-status-cyan)',
 };
 
-const DEFAULT_TOOL_COLOR = '#6b7280';
+const DEFAULT_TOOL_COLOR = 'var(--cv-text-dim)';
 const INPUT_TRUNCATE_LENGTH = 200;
 const RESULT_TRUNCATE_LENGTH = 200;
 
@@ -56,8 +56,8 @@ function formatDuration(ms: number): string {
 
 const styles = {
   container: (isError: boolean, expanded: boolean): React.CSSProperties => ({
-    background: '#0f0f18',
-    border: isError ? '1px solid #ef4444' : '1px solid #1e1e30',
+    background: 'var(--cv-bg-tool-card)',
+    border: isError ? '1px solid var(--cv-status-danger)' : '1px solid var(--cv-border-subtle)',
     borderRadius: 6,
     margin: '6px 0',
     overflow: 'hidden',
@@ -76,7 +76,7 @@ const styles = {
     transition: 'transform 0.2s ease',
     transform: expanded ? 'rotate(90deg)' : 'rotate(0deg)',
     fontSize: 9,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
     flexShrink: 0,
   }),
   badge: (color: string): React.CSSProperties => ({
@@ -86,14 +86,14 @@ const styles = {
     fontSize: 11,
     fontWeight: 600,
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
-    color: '#fff',
+    color: 'var(--cv-text-on-accent)',
     background: color,
     opacity: 0.9,
     flexShrink: 0,
   }),
   summary: {
     fontSize: 12,
-    color: '#8888a0',
+    color: 'var(--cv-text-muted)',
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
     overflow: 'hidden' as const,
     textOverflow: 'ellipsis' as const,
@@ -103,13 +103,13 @@ const styles = {
   },
   duration: {
     fontSize: 11,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
     flexShrink: 0,
     whiteSpace: 'nowrap' as const,
   },
   errorIcon: {
     fontSize: 14,
-    color: '#ef4444',
+    color: 'var(--cv-status-danger)',
     flexShrink: 0,
   },
   expandedWrapper: (expanded: boolean): React.CSSProperties => ({
@@ -120,20 +120,20 @@ const styles = {
   }),
   section: {
     padding: '8px 12px',
-    borderTop: '1px solid #1e1e30',
+    borderTop: '1px solid var(--cv-border-subtle)',
   },
   sectionLabel: {
     fontSize: 10,
     fontWeight: 600,
     textTransform: 'uppercase' as const,
     letterSpacing: 1,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
     marginBottom: 4,
   },
   sectionContent: {
     fontSize: 12,
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
-    color: '#b0b0c0',
+    color: 'var(--cv-text-result-content)',
     whiteSpace: 'pre-wrap' as const,
     wordBreak: 'break-word' as const,
     lineHeight: 1.5,
@@ -141,7 +141,7 @@ const styles = {
     overflowY: 'auto' as const,
   },
   errorContent: {
-    color: '#f87171',
+    color: 'var(--cv-status-danger-bright)',
   },
 } as const;
 

@@ -30,8 +30,8 @@ function renderMarkdown(text: string): React.ReactNode[] {
       <pre
         key={`code-${nodes.length}`}
         style={{
-          background: '#0a0a14',
-          border: '1px solid #1e1e30',
+          background: 'var(--cv-bg-code-block)',
+          border: '1px solid var(--cv-border-subtle)',
           borderRadius: 6,
           padding: 12,
           margin: '8px 0',
@@ -39,14 +39,14 @@ function renderMarkdown(text: string): React.ReactNode[] {
           fontSize: 12,
           lineHeight: 1.5,
           fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
-          color: '#c8c8d8',
+          color: 'var(--cv-text-code)',
         }}
       >
         {lang && (
           <div
             style={{
               fontSize: 10,
-              color: '#555',
+              color: 'var(--cv-text-subtle)',
               marginBottom: 6,
               textTransform: 'uppercase',
               letterSpacing: 1,
@@ -97,12 +97,12 @@ function renderInlineMarkdown(
         <code
           key={key}
           style={{
-            background: '#1a1a2e',
+            background: 'var(--cv-bg-elevated)',
             padding: '1px 5px',
             borderRadius: 3,
             fontSize: '0.9em',
             fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
-            color: '#c8c8d8',
+            color: 'var(--cv-text-code)',
           }}
         >
           {full.slice(1, -1)}
@@ -110,14 +110,14 @@ function renderInlineMarkdown(
       );
     } else if (full.startsWith('**')) {
       nodes.push(
-        <strong key={key} style={{ color: '#e8e8f0', fontWeight: 600 }}>
+        <strong key={key} style={{ color: 'var(--cv-text-bold)', fontWeight: 600 }}>
           {full.slice(2, -2)}
         </strong>
       );
     } else {
       // * or _ italic
       nodes.push(
-        <em key={key} style={{ fontStyle: 'italic', color: '#c0c0d0' }}>
+        <em key={key} style={{ fontStyle: 'italic', color: 'var(--cv-text-secondary)' }}>
           {full.slice(1, -1)}
         </em>
       );
@@ -158,20 +158,20 @@ const baseMessage: React.CSSProperties = {
 const styles = {
   user: {
     ...baseMessage,
-    background: '#1a1a2e',
-    borderLeft: '3px solid #6366f1',
-    color: '#e0e0e8',
+    background: 'var(--cv-bg-elevated)',
+    borderLeft: '3px solid var(--cv-accent-indigo)',
+    color: 'var(--cv-text-primary)',
   } as React.CSSProperties,
   assistant: {
     ...baseMessage,
-    background: '#12121a',
-    borderLeft: '3px solid #22c55e',
-    color: '#e0e0e8',
+    background: 'var(--cv-bg-panel)',
+    borderLeft: '3px solid var(--cv-status-success)',
+    color: 'var(--cv-text-primary)',
   } as React.CSSProperties,
   system: {
     ...baseMessage,
     background: 'transparent',
-    color: '#666',
+    color: 'var(--cv-text-subtle-alt)',
     textAlign: 'center' as const,
     fontSize: 12,
     padding: '8px 16px',
@@ -187,10 +187,10 @@ const styles = {
     gap: 8,
   } as React.CSSProperties,
   userLabel: {
-    color: '#6366f1',
+    color: 'var(--cv-accent-indigo)',
   },
   assistantLabel: {
-    color: '#22c55e',
+    color: 'var(--cv-status-success)',
   },
   modelBadge: {
     display: 'inline-block',
@@ -198,8 +198,8 @@ const styles = {
     fontWeight: 500,
     padding: '1px 6px',
     borderRadius: 3,
-    background: '#1a2e1a',
-    color: '#4ade80',
+    background: 'var(--cv-bg-model-badge)',
+    color: 'var(--cv-status-success-bright)',
     letterSpacing: 0.3,
     textTransform: 'none' as const,
   },
@@ -208,13 +208,13 @@ const styles = {
     gap: 12,
     marginTop: 10,
     fontSize: 11,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
   },
   toolResult: {
     ...baseMessage,
-    background: '#14141e',
-    borderLeft: '3px solid #6366f1',
+    background: 'var(--cv-bg-tool-result)',
+    borderLeft: '3px solid var(--cv-accent-indigo)',
     padding: 12,
   } as React.CSSProperties,
   toolResultLabel: {
@@ -222,13 +222,13 @@ const styles = {
     fontWeight: 600,
     textTransform: 'uppercase' as const,
     letterSpacing: 1,
-    color: '#6366f1',
+    color: 'var(--cv-accent-indigo)',
     marginBottom: 4,
   } as React.CSSProperties,
   toolResultContent: {
     fontSize: 12,
     fontFamily: "'SF Mono', 'Fira Code', 'Consolas', monospace",
-    color: '#b0b0c0',
+    color: 'var(--cv-text-result-content)',
     whiteSpace: 'pre-wrap' as const,
     wordBreak: 'break-word' as const,
     lineHeight: 1.5,
@@ -236,7 +236,7 @@ const styles = {
     overflowY: 'auto' as const,
   } as React.CSSProperties,
   errorBorder: {
-    borderLeft: '3px solid #ef4444',
+    borderLeft: '3px solid var(--cv-status-danger)',
   },
   content: {
     whiteSpace: 'pre-wrap' as const,

@@ -100,12 +100,12 @@ function BurnTooltip({
   return (
     <div
       style={{
-        background: '#1a1a2e',
-        border: '1px solid #333',
+        background: 'var(--cv-bg-elevated)',
+        border: '1px solid var(--cv-border-muted)',
         borderRadius: 6,
         padding: '8px 12px',
         fontSize: 12,
-        color: '#e0e0e8',
+        color: 'var(--cv-text-primary)',
         minWidth: 180,
       }}
     >
@@ -113,7 +113,7 @@ function BurnTooltip({
         style={{
           fontWeight: 700,
           marginBottom: 6,
-          color: '#8888a0',
+          color: 'var(--cv-text-muted)',
           fontSize: 11,
           textTransform: 'uppercase',
           letterSpacing: '0.05em',
@@ -143,7 +143,7 @@ function BurnTooltip({
                 flexShrink: 0,
               }}
             />
-            <span style={{ color: '#aaa' }}>{entry.name}</span>
+            <span style={{ color: 'var(--cv-text-chart-legend)' }}>{entry.name}</span>
           </span>
           <span style={{ fontWeight: 600, fontVariantNumeric: 'tabular-nums' }}>
             {formatTokenValue(entry.value)}
@@ -153,7 +153,7 @@ function BurnTooltip({
       {dataPoint && (
         <div
           style={{
-            borderTop: '1px solid #333',
+            borderTop: '1px solid var(--cv-border-muted)',
             marginTop: 6,
             paddingTop: 6,
             display: 'flex',
@@ -161,8 +161,8 @@ function BurnTooltip({
             fontWeight: 700,
           }}
         >
-          <span style={{ color: '#8888a0' }}>Cost</span>
-          <span style={{ color: '#22c55e' }}>{formatCost(dataPoint.cost)}</span>
+          <span style={{ color: 'var(--cv-text-muted)' }}>Cost</span>
+          <span style={{ color: 'var(--cv-status-success)' }}>{formatCost(dataPoint.cost)}</span>
         </div>
       )}
     </div>
@@ -231,7 +231,7 @@ export function TokenBurnChart(): React.ReactElement {
           alignItems: 'center',
           justifyContent: 'center',
           padding: '40px 20px',
-          color: '#555',
+          color: 'var(--cv-text-subtle)',
           fontSize: 13,
           fontStyle: 'italic',
         }}
@@ -256,7 +256,7 @@ export function TokenBurnChart(): React.ReactElement {
           padding: '4px 10px',
           fontSize: 13,
           fontWeight: 700,
-          color: '#22c55e',
+          color: 'var(--cv-status-success)',
           fontVariantNumeric: 'tabular-nums',
           letterSpacing: '0.02em',
         }}
@@ -271,39 +271,39 @@ export function TokenBurnChart(): React.ReactElement {
         >
           <defs>
             <linearGradient id="grad-input" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#3b82f6" stopOpacity={0.4} />
-              <stop offset="100%" stopColor="#3b82f6" stopOpacity={0.05} />
+              <stop offset="0%" stopColor="var(--cv-status-blue)" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="var(--cv-status-blue)" stopOpacity={0.05} />
             </linearGradient>
             <linearGradient id="grad-output" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#22c55e" stopOpacity={0.4} />
-              <stop offset="100%" stopColor="#22c55e" stopOpacity={0.05} />
+              <stop offset="0%" stopColor="var(--cv-status-success)" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="var(--cv-status-success)" stopOpacity={0.05} />
             </linearGradient>
             <linearGradient id="grad-cache-read" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.4} />
-              <stop offset="100%" stopColor="#06b6d4" stopOpacity={0.05} />
+              <stop offset="0%" stopColor="var(--cv-status-cyan)" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="var(--cv-status-cyan)" stopOpacity={0.05} />
             </linearGradient>
             <linearGradient id="grad-cache-create" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.4} />
-              <stop offset="100%" stopColor="#f59e0b" stopOpacity={0.05} />
+              <stop offset="0%" stopColor="var(--cv-status-warning)" stopOpacity={0.4} />
+              <stop offset="100%" stopColor="var(--cv-status-warning)" stopOpacity={0.05} />
             </linearGradient>
           </defs>
 
           <XAxis
             dataKey="index"
-            tick={{ fontSize: 11, fill: '#888' }}
+            tick={{ fontSize: 11, fill: 'var(--cv-text-chart-axis-label)' }}
             tickLine={false}
-            axisLine={{ stroke: '#222' }}
+            axisLine={{ stroke: 'var(--cv-border-chart-axis)' }}
             label={{
               value: 'Turn',
               position: 'insideBottomRight',
               offset: -4,
-              style: { fontSize: 10, fill: '#666' },
+              style: { fontSize: 10, fill: 'var(--cv-text-subtle-alt)' },
             }}
           />
           <YAxis
-            tick={{ fontSize: 11, fill: '#888' }}
+            tick={{ fontSize: 11, fill: 'var(--cv-text-chart-axis-label)' }}
             tickLine={false}
-            axisLine={{ stroke: '#222' }}
+            axisLine={{ stroke: 'var(--cv-border-chart-axis)' }}
             tickFormatter={formatTokenAxis}
             width={52}
           />
@@ -315,9 +315,9 @@ export function TokenBurnChart(): React.ReactElement {
             height={28}
             iconType="square"
             iconSize={10}
-            wrapperStyle={{ fontSize: 11, color: '#888' }}
+            wrapperStyle={{ fontSize: 11, color: 'var(--cv-text-chart-axis-label)' }}
             formatter={(value: string) => (
-              <span style={{ color: '#888' }}>{value}</span>
+              <span style={{ color: 'var(--cv-text-chart-axis-label)' }}>{value}</span>
             )}
           />
 
@@ -327,7 +327,7 @@ export function TokenBurnChart(): React.ReactElement {
             dataKey="cache_creation_input_tokens"
             name="Cache Creation"
             stackId="tokens"
-            stroke="#f59e0b"
+            stroke="var(--cv-status-warning)"
             strokeWidth={1.5}
             fill="url(#grad-cache-create)"
           />
@@ -336,7 +336,7 @@ export function TokenBurnChart(): React.ReactElement {
             dataKey="cache_read_input_tokens"
             name="Cache Read"
             stackId="tokens"
-            stroke="#06b6d4"
+            stroke="var(--cv-status-cyan)"
             strokeWidth={1.5}
             fill="url(#grad-cache-read)"
           />
@@ -345,7 +345,7 @@ export function TokenBurnChart(): React.ReactElement {
             dataKey="output_tokens"
             name="Output"
             stackId="tokens"
-            stroke="#22c55e"
+            stroke="var(--cv-status-success)"
             strokeWidth={1.5}
             fill="url(#grad-output)"
           />
@@ -354,7 +354,7 @@ export function TokenBurnChart(): React.ReactElement {
             dataKey="input_tokens"
             name="Input"
             stackId="tokens"
-            stroke="#3b82f6"
+            stroke="var(--cv-status-blue)"
             strokeWidth={1.5}
             fill="url(#grad-input)"
           />

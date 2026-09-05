@@ -7,17 +7,17 @@ import type { ParsedMessage, ToolCallInfo } from '../types';
 // ---------------------------------------------------------------------------
 
 const TOOL_COLORS: Record<string, string> = {
-  Bash: '#f59e0b',
-  Read: '#3b82f6',
-  Glob: '#3b82f6',
-  Grep: '#3b82f6',
-  Write: '#22c55e',
-  Edit: '#22c55e',
-  Agent: '#a855f7',
-  WebSearch: '#06b6d4',
-  WebFetch: '#06b6d4',
+  Bash: 'var(--cv-status-warning)',
+  Read: 'var(--cv-status-blue)',
+  Glob: 'var(--cv-status-blue)',
+  Grep: 'var(--cv-status-blue)',
+  Write: 'var(--cv-status-success)',
+  Edit: 'var(--cv-status-success)',
+  Agent: 'var(--cv-status-purple)',
+  WebSearch: 'var(--cv-status-cyan)',
+  WebFetch: 'var(--cv-status-cyan)',
 };
-const DEFAULT_TOOL_COLOR = '#6b7280';
+const DEFAULT_TOOL_COLOR = 'var(--cv-text-dim)';
 
 function getToolColor(name: string): string {
   return TOOL_COLORS[name] ?? DEFAULT_TOOL_COLOR;
@@ -146,9 +146,9 @@ function formatTimestamp(ts: string): string {
 // ---------------------------------------------------------------------------
 
 const RECOVERY_COLORS: Record<RecoveryAction, { bg: string; fg: string }> = {
-  'Retried same tool': { bg: '#1e3a5f', fg: '#60a5fa' },
-  'Tried different approach': { bg: '#1a3329', fg: '#4ade80' },
-  'Gave up': { bg: '#3b1c1c', fg: '#f87171' },
+  'Retried same tool': { bg: 'var(--cv-bg-recovery-retried)', fg: 'var(--cv-recovery-retried-text)' },
+  'Tried different approach': { bg: 'var(--cv-bg-recovery-tried)', fg: 'var(--cv-status-success-bright)' },
+  'Gave up': { bg: 'var(--cv-bg-recovery-gave-up)', fg: 'var(--cv-status-danger-bright)' },
 };
 
 // ---------------------------------------------------------------------------
@@ -162,16 +162,16 @@ const s = {
     display: 'flex',
     flexDirection: 'column' as const,
     height: '100%',
-    background: '#0e0e18',
-    color: '#d0d0e0',
+    background: 'var(--cv-bg-error-root)',
+    color: 'var(--cv-text-error-root)',
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
   },
 
   // Error density strip
   stripContainer: {
-    background: '#12121a',
+    background: 'var(--cv-bg-panel)',
     padding: '8px 16px',
-    borderBottom: '1px solid #1e1e30',
+    borderBottom: '1px solid var(--cv-border-subtle)',
     flexShrink: 0,
   },
   stripSvg: {
@@ -179,7 +179,7 @@ const s = {
     width: '100%',
     height: 36,
     borderRadius: 4,
-    background: '#12121a',
+    background: 'var(--cv-bg-panel)',
     cursor: 'pointer',
   },
 
@@ -189,19 +189,19 @@ const s = {
     alignItems: 'center',
     gap: 16,
     padding: '8px 16px',
-    borderBottom: '1px solid #1e1e30',
-    background: '#13131f',
+    borderBottom: '1px solid var(--cv-border-subtle)',
+    background: 'var(--cv-bg-summary-bar)',
     fontSize: 13,
-    color: '#8888a0',
+    color: 'var(--cv-text-muted)',
     flexShrink: 0,
     flexWrap: 'wrap' as const,
   },
   summaryHighlight: {
-    color: '#ef4444',
+    color: 'var(--cv-status-danger)',
     fontWeight: 700,
   },
   summaryMuted: {
-    color: '#6b7280',
+    color: 'var(--cv-text-dim)',
     fontSize: 12,
   },
 
@@ -217,8 +217,8 @@ const s = {
 
   // Individual card
   card: {
-    background: '#1a1a2e',
-    borderLeft: '4px solid #ef4444',
+    background: 'var(--cv-bg-elevated)',
+    borderLeft: '4px solid var(--cv-status-danger)',
     borderRadius: 8,
     padding: '14px 16px',
     display: 'flex',
@@ -238,7 +238,7 @@ const s = {
     fontSize: 11,
     fontWeight: 600,
     fontFamily: MONO,
-    color: '#fff',
+    color: 'var(--cv-text-on-accent)',
     background: color,
     flexShrink: 0,
   }),
@@ -249,13 +249,13 @@ const s = {
     fontSize: 10,
     fontWeight: 600,
     fontFamily: MONO,
-    color: '#c084fc',
-    background: '#2d1f4e',
+    color: 'var(--cv-agent-badge-text)',
+    background: 'var(--cv-bg-agent-badge)',
     flexShrink: 0,
   } as React.CSSProperties,
   cardMeta: {
     fontSize: 11,
-    color: '#555',
+    color: 'var(--cv-text-subtle)',
     marginLeft: 'auto',
     whiteSpace: 'nowrap' as const,
     flexShrink: 0,
@@ -263,22 +263,22 @@ const s = {
   inputSummary: {
     fontSize: 12,
     fontFamily: MONO,
-    color: '#8888a0',
+    color: 'var(--cv-text-muted)',
     whiteSpace: 'pre-wrap' as const,
     wordBreak: 'break-word' as const,
     lineHeight: 1.5,
-    background: '#12121a',
+    background: 'var(--cv-bg-panel)',
     padding: '6px 10px',
     borderRadius: 4,
   },
   errorMessage: {
     fontSize: 12,
     fontFamily: MONO,
-    color: '#f87171',
+    color: 'var(--cv-status-danger-bright)',
     whiteSpace: 'pre-wrap' as const,
     wordBreak: 'break-word' as const,
     lineHeight: 1.5,
-    background: '#1c1018',
+    background: 'var(--cv-bg-error-message)',
     padding: '6px 10px',
     borderRadius: 4,
     maxHeight: 200,
@@ -305,7 +305,7 @@ const s = {
     justifyContent: 'center',
     height: '100%',
     gap: 16,
-    color: '#4ade80',
+    color: 'var(--cv-status-success-bright)',
   },
   emptyCheck: {
     fontSize: 48,
@@ -314,7 +314,7 @@ const s = {
   emptyText: {
     fontSize: 18,
     fontWeight: 600,
-    color: '#4ade80',
+    color: 'var(--cv-status-success-bright)',
   },
 } as const;
 
@@ -349,7 +349,7 @@ function DensityStrip({ incidents, onDotClick }: DensityStripProps): React.React
         preserveAspectRatio="none"
       >
         {/* Background track */}
-        <rect x={0} y={STRIP_HEIGHT / 2 - 1} width={1000} height={2} rx={1} fill="#1e1e30" />
+        <rect x={0} y={STRIP_HEIGHT / 2 - 1} width={1000} height={2} rx={1} fill="var(--cv-border-subtle)" />
 
         {/* Error dots */}
         {incidents.map((inc, i) => {
@@ -360,7 +360,7 @@ function DensityStrip({ incidents, onDotClick }: DensityStripProps): React.React
               cx={cx}
               cy={STRIP_HEIGHT / 2}
               r={DOT_RADIUS}
-              fill="#ef4444"
+              fill="var(--cv-status-danger)"
               opacity={0.85}
               style={{ cursor: 'pointer' }}
               onClick={(e) => {
@@ -393,7 +393,7 @@ function SummaryBar({ errorCount, totalToolCalls, topFailingTool }: SummaryBarPr
       <span>
         <span style={s.summaryHighlight}>{errorCount}</span>
         {` error${errorCount === 1 ? '' : 's'} out of `}
-        <span style={{ fontWeight: 600, color: '#d0d0e0' }}>{totalToolCalls}</span>
+        <span style={{ fontWeight: 600, color: 'var(--cv-text-error-root)' }}>{totalToolCalls}</span>
         {' tool calls '}
         <span style={s.summaryMuted}>({pct}% failure rate)</span>
       </span>
@@ -470,7 +470,7 @@ export function ErrorReplayView(): React.ReactElement {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'center' });
       // Brief highlight flash
-      el.style.outline = '2px solid #ef4444';
+      el.style.outline = '2px solid var(--cv-status-danger)';
       el.style.outlineOffset = '2px';
       setTimeout(() => {
         el.style.outline = 'none';

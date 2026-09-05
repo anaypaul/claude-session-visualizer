@@ -48,10 +48,10 @@ function MetricRow({
         fontSize: 12,
       }}
     >
-      <span style={{ color: '#8888a0' }}>{label}</span>
+      <span style={{ color: 'var(--cv-text-muted)' }}>{label}</span>
       <span
         style={{
-          color: color ?? '#e0e0e8',
+          color: color ?? 'var(--cv-text-primary)',
           fontWeight: 600,
           fontVariantNumeric: 'tabular-nums',
         }}
@@ -75,15 +75,15 @@ function ChartTooltip({
   return (
     <div
       style={{
-        background: '#1a1a2e',
-        border: '1px solid #333',
+        background: 'var(--cv-bg-elevated)',
+        border: '1px solid var(--cv-border-muted)',
         borderRadius: 4,
         padding: '4px 8px',
         fontSize: 11,
-        color: '#e0e0e8',
+        color: 'var(--cv-text-primary)',
       }}
     >
-      <span style={{ color: '#8888a0' }}>{payload[0].payload.name}: </span>
+      <span style={{ color: 'var(--cv-text-muted)' }}>{payload[0].payload.name}: </span>
       <span style={{ fontWeight: 600 }}>{payload[0].value}</span>
     </div>
   );
@@ -176,8 +176,8 @@ export function MetricsPanel() {
     <div
       style={{
         width: '100%',
-        background: '#12121a',
-        borderTop: '1px solid #1a1a2e',
+        background: 'var(--cv-bg-panel)',
+        borderTop: '1px solid var(--cv-bg-elevated)',
         padding: '10px 14px',
         display: 'flex',
         flexDirection: 'column',
@@ -190,7 +190,7 @@ export function MetricsPanel() {
         style={{
           fontSize: 11,
           fontWeight: 700,
-          color: '#8888a0',
+          color: 'var(--cv-text-muted)',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
           marginBottom: 2,
@@ -206,7 +206,7 @@ export function MetricsPanel() {
           display: 'flex',
           justifyContent: 'space-between',
           fontSize: 11,
-          color: '#6b7280',
+          color: 'var(--cv-text-dim)',
           paddingLeft: 8,
         }}
       >
@@ -224,15 +224,15 @@ export function MetricsPanel() {
             fontSize: 12,
           }}
         >
-          <span style={{ color: '#8888a0' }}>Cache efficiency</span>
+          <span style={{ color: 'var(--cv-text-muted)' }}>Cache efficiency</span>
           <span
             style={{
               color:
                 metrics.cacheEfficiency > 70
-                  ? '#22c55e'
+                  ? 'var(--cv-status-success)'
                   : metrics.cacheEfficiency > 30
-                    ? '#f59e0b'
-                    : '#ef4444',
+                    ? 'var(--cv-status-warning)'
+                    : 'var(--cv-status-danger)',
               fontWeight: 600,
               fontSize: 12,
             }}
@@ -244,7 +244,7 @@ export function MetricsPanel() {
         <div
           style={{
             height: 3,
-            background: '#1a1a2e',
+            background: 'var(--cv-bg-elevated)',
             borderRadius: 2,
             marginTop: 3,
             overflow: 'hidden',
@@ -256,10 +256,10 @@ export function MetricsPanel() {
               width: `${metrics.cacheEfficiency}%`,
               background:
                 metrics.cacheEfficiency > 70
-                  ? '#22c55e'
+                  ? 'var(--cv-status-success)'
                   : metrics.cacheEfficiency > 30
-                    ? '#f59e0b'
-                    : '#ef4444',
+                    ? 'var(--cv-status-warning)'
+                    : 'var(--cv-status-danger)',
               borderRadius: 2,
               transition: 'width 0.3s ease',
             }}
@@ -268,7 +268,7 @@ export function MetricsPanel() {
       </div>
 
       {/* Divider */}
-      <div style={{ height: 1, background: '#1a1a2e', margin: '2px 0' }} />
+      <div style={{ height: 1, background: 'var(--cv-bg-elevated)', margin: '2px 0' }} />
 
       {/* Messages */}
       <MetricRow
@@ -280,7 +280,7 @@ export function MetricsPanel() {
       <MetricRow
         label="Active agents"
         value={metrics.activeAgents}
-        color={metrics.activeAgents > 0 ? '#22c55e' : '#8888a0'}
+        color={metrics.activeAgents > 0 ? 'var(--cv-status-success)' : 'var(--cv-text-muted)'}
       />
 
       {/* Session duration */}
@@ -290,7 +290,7 @@ export function MetricsPanel() {
       />
 
       {/* Divider */}
-      <div style={{ height: 1, background: '#1a1a2e', margin: '2px 0' }} />
+      <div style={{ height: 1, background: 'var(--cv-bg-elevated)', margin: '2px 0' }} />
 
       {/* Tool calls */}
       <div
@@ -301,8 +301,8 @@ export function MetricsPanel() {
           fontSize: 12,
         }}
       >
-        <span style={{ color: '#8888a0' }}>Tool calls</span>
-        <span style={{ color: '#e0e0e8', fontWeight: 600 }}>
+        <span style={{ color: 'var(--cv-text-muted)' }}>Tool calls</span>
+        <span style={{ color: 'var(--cv-text-primary)', fontWeight: 600 }}>
           {metrics.totalToolCalls}
         </span>
       </div>
@@ -318,7 +318,7 @@ export function MetricsPanel() {
             >
               <XAxis
                 dataKey="name"
-                tick={{ fontSize: 9, fill: '#6b7280' }}
+                tick={{ fontSize: 9, fill: 'var(--cv-text-dim)' }}
                 tickLine={false}
                 axisLine={false}
                 interval={0}
@@ -328,11 +328,11 @@ export function MetricsPanel() {
               />
               <Tooltip
                 content={<ChartTooltip />}
-                cursor={{ fill: 'rgba(255,255,255,0.03)' }}
+                cursor={{ fill: 'var(--cv-overlay-faint)' }}
               />
               <Bar
                 dataKey="count"
-                fill="#4f46e5"
+                fill="var(--cv-accent-indigo-strong)"
                 radius={[2, 2, 0, 0]}
                 maxBarSize={24}
               />
